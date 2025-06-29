@@ -1,160 +1,132 @@
-/*
-***************************
-**       FramerAuth      **
-***************************
-Modifying the core functionality (core, store or extension overrides) will void your support
-Please add custom overrides at the end of the file.
-*/
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
-// @ts-ignore
-import * as faCore from "https://cdn.framerauth.com/packages/overrides/core/live/latest/core.js"
-// @ts-ignore
-import * as faStore from "https://cdn.framerauth.com/packages/overrides/store/live/latest/store.js"
-// @ts-ignore
-import * as faExtensions from "https://cdn.framerauth.com/packages/overrides/extensions/live/latest/extensions.js"
+// ⏩ Public (unauthenticated) landing page for Pulse CRM
+//    • WhatsApp‑green (#25D366) accent
+//    • Responsive hero, features grid, footer
+//    • Expects a `onLogin` prop (opens Google OAuth)
+// -----------------------------------------------------------------------------
+export default function PublicHome({ onLogin }) {
+  return (
+    <div className="min-h-screen flex flex-col bg-white text-neutral-800">
+      {/* Header */}
+      <header className="w-full px-6 py-4 flex items-center justify-between shadow-sm">
+        <div className="flex items-center gap-2">
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="#25D366"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M12 2a10 10 0 00-7.07 17.07L2 22l2.93-2.93A10 10 0 1012 2z" />
+          </svg>
+          <span className="font-semibold text-lg">Pulse</span>
+        </div>
+        <div className="hidden md:flex items-center gap-6 text-sm">
+          <a href="#features" className="hover:text-emerald-600">Features</a>
+          <a href="#pricing" className="hover:text-emerald-600">Pricing</a>
+          <a href="#faq" className="hover:text-emerald-600">FAQ</a>
+          <a href="/about" className="hover:text-emerald-600">About</a>
+          <a href="/privacy" className="hover:text-emerald-600">Privacy</a>
+          <a href="/terms" className="hover:text-emerald-600">Terms</a>
+          <a href="/login" className="hover:text-emerald-600">Login</a>
+        </div>
+      </header>
 
-/*
- ***************************
- **     Core overrides    **
- ***************************
- */
-export function withFullName(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faCore.withFullName(Component)
-}
-export function withAuth(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faCore.withAuth(Component)
-}
-export function withStore(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faCore.withStore(Component)
-}
-export function withSignOut(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faCore.withSignOut(Component)
-}
-export function withEmail(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faCore.withEmail(Component)
-}
-export function withFirstName(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faCore.withFirstName(Component)
-}
-export function withLoggedIn(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faCore.withLoggedIn(Component)
-}
-export function withLoggedOut(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faCore.withLoggedOut(Component)
-}
+      {/* Hero */}
+      <section className="flex flex-col-reverse md:flex-row items-center gap-10 px-6 md:px-12 lg:px-24 pt-12 pb-16 flex-grow">
+        <div className="w-full md:w-1/2 text-center md:text-left">
+          <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight mb-6">
+            Stay <span className="text-emerald-600">closer</span> to the
+            people who matter.
+          </h1>
+          <p className="text-lg mb-8 max-w-lg mx-auto md:mx-0">
+            Pulse CRM helps you remember birthdays, follow‑ups, and important
+            moments — all synced from your Google Contacts.
+          </p>
+          <Button
+            size="lg"
+            className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-xl px-8 py-6 rounded-2xl text-lg"
+            onClick={onLogin}
+          >
+            Continue with Google
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </Button>
+        </div>
 
-/*
- ***************************
- **    Store overrides    **
- ***************************
- */
-export function withActiveLicense(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faStore.withActiveLicense(Component)
-}
-export function withNoActiveLicense(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faStore.withNoActiveLicense(Component)
-}
-export function withVariant(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faStore.withVariant(Component)
-}
-export function withVariantActiveLicense(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faStore.withVariantActiveLicense(Component)
-}
+        <motion.img
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          src="/illustrations/dashboard-green.svg"
+          alt="Pulse dashboard screenshot"
+          className="w-full md:w-1/2 rounded-2xl shadow-lg"
+        />
+      </section>
 
-/*
- ***************************
- **  Extension overrides  **
- ***************************
- */
-export function withDynamicGridHeight(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faExtensions.withDynamicGridHeight(Component)
-}
+      {/* Features */}
+      <section id="features" className="px-6 md:px-12 lg:px-24 py-16 bg-gray-50">
+        <h2 className="text-3xl font-bold text-center mb-12">Features that connect you</h2>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {[
+            {
+              title: "Smart Search",
+              desc: "Find any contact in seconds with fuzzy matching and tags.",
+              icon: "search",
+            },
+            {
+              title: "Reminders",
+              desc: "Birthday and follow‑up nudges so you never lose touch.",
+              icon: "bell",
+            },
+            {
+              title: "Notes & Timeline",
+              desc: "Keep context — jot down memories, last talks, and next steps.",
+              icon: "file-text",
+            },
+            {
+              title: "Calendar Sync",
+              desc: "See upcoming events across calendars, right beside contacts.",
+              icon: "calendar",
+            },
+            {
+              title: "Privacy First",
+              desc: "Your data lives in your account. Export or delete anytime.",
+              icon: "shield",
+            },
+            {
+              title: "Instant Setup",
+              desc: "Sign in with Google — no downloads, no chrome extensions.",
+              icon: "zap",
+            },
+          ].map(({ title, desc, icon }) => (
+            <div
+              key={title}
+              className="p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="w-10 h-10 mb-4 flex items-center justify-center rounded-full bg-emerald-100">
+                <i className={`lucide lucide-${icon} text-emerald-600`}></i>
+              </div>
+              <h3 className="font-semibold text-lg mb-2">{title}</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-/*
- ***************************
- **    Legacy overrides   **
- ***************************
- */
-export function withIsLessonComplete(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faExtensions.withIsTagged(Component, "course:status", "completed")
-}
-
-export function withActionCompleteLesson(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    return faExtensions.withToggleTag(Component, "course:status", "completed")
-}
-
-/*
-***********************************************************
-** FramerAuth -- Make your own CUSTOM withPlan overrides **
-***********************************************************
-To make your own overrides for withPlan, follow these 3 steps:
-1. Copy the override below and change the override name "withPlanStandard" to something else (e.g. withPlanPremium).
-2. Change the licenseId field inside your new override to the license ID you want to use.
-3. Start using your new override on your site. Make sure the override code is updated on your site.
-*/
-export function withPlanStandard(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    // Enter your own LemonSqueezy Product Variant ID here
-    const licenseId = "123456" // <-- Your LemonSqueezy Product Variant ID for this override goes here (example)
-    return faStore.withPlan(Component, licenseId)
-} // copy until here
-
-/*
-**************************************************************
-** FramerAuth -- Make your own CUSTOM bookmarking overrides **
-**************************************************************
-To make your own overrides for bookmarking, follow these 4 steps:
-1. Copy the override below and change the override name "withComponentBookmarkBlog" to something else (e.g. withComponentBookmarkLesson).
-2. Change the prefix field inside your new override (e.g. "bookmark:lesson")
-3. Repeat steps 1 & 2 for withToggleBookmarkBlog & withToggleBookmarkLesson
-3. Start using your new override on your site. Make sure the override code is updated on your site.
-*/
-export function withComponentBookmarkBlog(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    const prefix = "bookmark:blog" // <--- Your custom prefix for this override goes here (example)
-    return faExtensions.withTags(Component, prefix)
-}
-export function withIsBookmarkedBlog(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    const prefix = "bookmark:blog" // <--- Your custom prefix for this override goes here (example)
-    return faExtensions.withIsTagged(Component, prefix)
-}
-export function withToggleBookmarkBlog(
-    Component: React.FunctionComponent<any>
-): React.ComponentType<any> {
-    const prefix = "bookmark:blog" // <--- Your custom prefix for this override goes here (example)
-    return faExtensions.withToggleTag(Component, prefix)
+      {/* Footer */}
+      <footer className="px-6 md:px-12 lg:px-24 py-10 text-sm text-gray-500 bg-white border-t">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p>© {new Date().getFullYear()} Pulse CRM</p>
+          <div className="flex gap-6">
+            <a href="/about" className="hover:text-emerald-600">About</a>
+            <a href="/privacy" className="hover:text-emerald-600">Privacy Policy</a>
+            <a href="/terms" className="hover:text-emerald-600">Terms</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
 }
