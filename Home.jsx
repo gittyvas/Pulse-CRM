@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 
 // ⏩ Public (unauthenticated) landing page for Pulse CRM
 //    • WhatsApp‑green (#25D366) accent
@@ -16,11 +15,23 @@ export default function PublicHome({ onLogin }) {
           <svg
             width="32"
             height="32"
-            viewBox="0 0 24 24"
-            fill="#25D366"
+            viewBox="0 0 48 48"
+            fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path d="M12 2a10 10 0 00-7.07 17.07L2 22l2.93-2.93A10 10 0 1012 2z" />
+            <path
+              fill="#25D366"
+              d="M24 4C13.51 4 5 12.51 5 23c0 3.93 1.2 7.57 3.25 10.6L5 44l10.77-3.11A19 19 0 0 0 24 42c10.49 0 19-8.51 19-19S34.49 4 24 4z"
+            />
+            <text
+              x="24"
+              y="30"
+              text-anchor="middle"
+              font-size="18"
+              fill="white"
+              font-family="Arial, sans-serif"
+              font-weight="bold"
+            >P</text>
           </svg>
           <span className="font-semibold text-lg">Pulse</span>
         </div>
@@ -51,8 +62,7 @@ export default function PublicHome({ onLogin }) {
             className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-xl px-8 py-6 rounded-2xl text-lg"
             onClick={onLogin}
           >
-            Continue with Google
-            <ArrowRight className="w-5 h-5 ml-2" />
+            Sign in / Sign up
           </Button>
         </div>
 
